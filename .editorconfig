@@ -1,0 +1,24 @@
+# EditorConfig is awesome: https://editorconfig.org
+
+# Default configuration for Moodle project.
+
+# A search for .editorconfig files will stop,
+# if the root filepath is reached or an EditorConfig file with root=true is found.
+root = true
+
+[*]
+charset = utf-8
+
+# Use an indent of 4 spaces with no tab characters.
+# Ref: https://docs.moodle.org/dev/Coding_style#Indentation
+indent_size = 4
+indent_style = space
+
+# Use standard Unix text format. Lines must end only with a linefeed (LF).
+# Ref: https://docs.moodle.org/dev/Coding_style#Line_Termination
+end_of_line = lf
+insert_final_newline = true
+
+# Lines should not contain trailing spaces.
+# Ref: https://docs.moodle.org/dev/Coding_style#Line_Termination
+trim_trailing_whitespace = true

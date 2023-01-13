@@ -1,0 +1,72 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_debugtoolbar/toolbar
+
+    Template to display debug toolbar.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    Example context (json):
+    {
+        "records": [],
+        "alerts": []
+    }
+}}
+
+{{! Build debug toolbar }}
+<ul id="local-debugtoolbar" class="list-inline footer-dark bg-dark text-light">
+    {{#records}}
+    <li class="list-inline-item">
+        <div class="btn-group dropup">
+            <button type="button" class="btn btn-secondary_ dropdown-toggle text-light {{style}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-{{ fa }} mr-1" role="img" aria-labelledby="local-debugtoolbar-fa-{{ fa }}-label"></i>
+                <span id="local-debugtoolbar-fa-{{ fa }}-label" class="mr-1">{{ title }}</span>
+            </button>
+            <div class="dropdown-menu bg-dark">
+                <!-- Dropdown menu links -->
+                {{#items}}
+                    {{#modal}}
+                        <button class="dropdown-item text-light {{style}} local-debugtoolbar-modal" data-targetid="{{ modal }}" type="button">{{ title }}</button>
+                    {{/modal}}
+                    {{^modal}}
+                        <span class="dropdown-item text-light {{style}}">{{ title }}</span>
+                    {{/modal}}
+                {{/items}}
+            </div>
+        </div>
+    </li>
+    {{/records}}
+</ul>
+
+{{! Build modals }}
+<div id="local-debugtoolbar-modals">
+{{#alerts}}
+    <div id="local-debugtoolbar-alerts-{{ type }}">
+        <ul>
+            {{#items}}
+                <li>{{{ . }}}</li>
+            {{/items}}
+        </ul>
+    </div>
+{{/alerts}}
+</div>
