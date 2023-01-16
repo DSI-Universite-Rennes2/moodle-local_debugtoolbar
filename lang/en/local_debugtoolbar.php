@@ -23,6 +23,7 @@
  */
 
 $string['pluginname'] = 'Debug toolbar';
+$string['privacy:metadata'] = 'The debug toolbar plugin does not store any personal data.';
 
 $string['cache'] = 'Cache';
 $string['cache_hits_X'] = 'Cache hits: {$a}';
