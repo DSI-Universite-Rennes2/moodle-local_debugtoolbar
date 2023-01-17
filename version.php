@@ -24,6 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2023010900; // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires = 2022041200; // Requires this Moodle version.
-$plugin->component = 'local_debugtoolbar'; // Full name of the plugin (used for diagnostics).
+$plugin->version = 2023010900;
+$plugin->release   = '1.0.0';
+$plugin->maturity  = MATURITY_STABLE;
+$plugin->requires = 2022041900; // Moodle 4.0 release and upwards.
+$plugin->component = 'local_debugtoolbar';
