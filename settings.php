@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_debugtoolbar\setting\admin_setting_plugin_activation;
+
 defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig) {
@@ -33,7 +35,7 @@ if ($hassiteconfig) {
     $settings->add(new admin_setting_heading('local_debugtoolbar/header', get_string('settings'), $content));
 
     // Add a checkbox to enable/disable module.
-    $settings->add(new admin_setting_configcheckbox('local_debugtoolbar/enable',
+    $settings->add(new admin_setting_plugin_activation('local_debugtoolbar/enable',
             get_string('enable_debugtoolbar', 'local_debugtoolbar'), '', 0));
 
     // Add a checkbox to enable/disable error handler.

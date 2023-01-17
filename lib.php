@@ -25,13 +25,8 @@
 defined('MOODLE_INTERNAL') || die;
 
 $_SESSION['local_debugtoolbar'] = array('errors' => [], 'warnings' => [], 'notices' => [], 'deprecated' => []);
+
 if (empty(get_config('local_debugtoolbar', 'enable_error_handler')) === false) {
-    error_reporting(-1);
-
-    $CFG->debug = 32767;
-    $CFG->debugdisplay = 1;
-    $CFG->perfdebug = 15;
-
     set_error_handler('local_debugtoolbar_error_handler');
 }
 
