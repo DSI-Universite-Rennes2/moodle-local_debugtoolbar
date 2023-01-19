@@ -19,6 +19,10 @@ After you have installed this local plugin, you should see a new option in the s
 > Site administration -> Plugins -> Local plugins -> Debug toolbar
 
 
+## Screenshot
+![Screenshot](.github/screenshots/screenshot001.png)
+
+
 ## Reporting security issues
 
 We take security seriously. If you discover a security issue, please bring it
