@@ -39,8 +39,7 @@ $string['db_writes_X'] = 'DB writes: {$a}';
 $string['deprecated_X'] = 'Deprecated: {$a}';
 $string['enable_debugtoolbar'] = 'Enable the debug toolbar';
 $string['enable_error_handler'] = 'Enable PHP error handler';
-$string['enable_error_handler_description'] = 'Override default PHP error handler with debugtoolbar error handler.<br />'.
-    ' It will also override <code>$CFG->debug</code>, <code>$CFG->debugdisplay</code> and <code>$CFG->perfdebug</code> variables.';
+$string['enable_error_handler_description'] = 'Override default PHP error handler to display all PHP errors in debug toolbar.';
 $string['errors_X'] = 'Errors: {$a}';
 $string['extra_memory_limit_X'] = 'Extra memory limit: {$a}';
 $string['filters_and_strings'] = 'Filters and strings';
@@ -66,7 +65,8 @@ $string['site_admin_X'] = 'Site admin: {$a}';
 $string['strings_filtered_X'] = 'Strings filtered: {$a}';
 $string['subpage_X'] = 'Sub-page: {$a}';
 $string['total_time_X'] = 'Total time: {$a} secs';
-$string['usage_warning'] = '<strong>DO NOT ENABLE THIS PLUGIN IN A PRODUCTION ENVIRONMENT.</strong>';
+$string['usage_warning'] = '<strong>DO NOT ENABLE THIS PLUGIN IN A PRODUCTION ENVIRONMENT.</strong><br />'.
+    'This plugin will override the following variables : <code>$CFG->debug</code>, <code>$CFG->debugdisplay</code> and <code>$CFG->perfdebug</code>.';
 $string['version_X'] = 'Version: {$a}';
 $string['warnings_X'] = 'Warnings: {$a}';
 $string['X_queries_in_Y_secs'] = '{$a->queries} queries in {$a->time} secs';
