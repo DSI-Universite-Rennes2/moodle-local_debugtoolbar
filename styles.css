@@ -17,8 +17,23 @@ html > body {
     line-height: 2em;
 }
 
+@media (max-width: 1400px) {
+    #local-debugtoolbar {
+        display: none;
+    }
+}
+
 #local-debugtoolbar .btn {
     border-radius: 0;
+    font-size: small;
+}
+
+#local-debugtoolbar .dropdown-menu {
+    min-width: 360px;
+}
+
+#local-debugtoolbar .dropdown-item {
+    font-size: small;
 }
 
 #local-debugtoolbar-modals {
