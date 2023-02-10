@@ -22,12 +22,22 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+/**
+ * Setup error handler as soon as practical on every moodle bootstrap after config has been loaded.
+ *
+ * @return void
+ */
+function local_debugtoolbar_after_config() {
+    if (empty(get_config('local_debugtoolbar', 'enable')) === true) {
+        // Return nothing if plugin has been disabled.
+        return;
+    }
 
-$_SESSION['local_debugtoolbar'] = array('errors' => [], 'warnings' => [], 'notices' => [], 'deprecated' => []);
+    $_SESSION['local_debugtoolbar'] = array('errors' => [], 'warnings' => [], 'notices' => [], 'deprecated' => []);
 
-if (empty(get_config('local_debugtoolbar', 'enable_error_handler')) === false) {
-    set_error_handler('local_debugtoolbar_error_handler');
+    if (empty(get_config('local_debugtoolbar', 'enable_error_handler')) === false) {
+        set_error_handler('local_debugtoolbar_error_handler');
+    }
 }
 
 /**
