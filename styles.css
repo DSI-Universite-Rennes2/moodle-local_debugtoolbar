@@ -1,9 +1,9 @@
-html > body {
+.local-debugtoolbar-enabled {
     margin-bottom: 3rem;
 }
 
-.footer-content-debugging,
-#page-footer .performanceinfo {
+.local-debugtoolbar-enabled .footer-content-debugging,
+.local-debugtoolbar-enabled #page-footer .performanceinfo {
     display: none;
 }
 

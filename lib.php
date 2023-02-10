@@ -28,10 +28,14 @@
  * @return void
  */
 function local_debugtoolbar_after_config() {
+    global $PAGE;
+
     if (empty(get_config('local_debugtoolbar', 'enable')) === true) {
         // Return nothing if plugin has been disabled.
         return;
     }
+
+    $PAGE->add_body_class('local-debugtoolbar-enabled');
 
     $_SESSION['local_debugtoolbar'] = array('errors' => [], 'warnings' => [], 'notices' => [], 'deprecated' => []);
 
