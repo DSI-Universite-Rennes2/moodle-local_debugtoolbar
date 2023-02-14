@@ -172,7 +172,9 @@ function local_debugtoolbar_before_footer() {
         $data->alerts = array();
         $label = get_string('no_alerts', 'local_debugtoolbar');
         $data->records[$i] = (object) ['title' => $label, 'fa' => 'exclamation-circle', 'items' => []];
-        foreach (['errors' => 'danger', 'warnings' => 'warning', 'deprecated' => 'warning', 'notices' => 'info'] as $type => $leveltype) {
+
+        $errortypes = ['errors' => 'danger', 'warnings' => 'warning', 'deprecated' => 'warning', 'notices' => 'info'];
+        foreach ($errortypes as $type => $leveltype) {
             $style = '';
             $count = count($PERF->local_debugtoolbar[$type]);
             $label = get_string(sprintf('%s_X', $type), 'local_debugtoolbar', $count);
