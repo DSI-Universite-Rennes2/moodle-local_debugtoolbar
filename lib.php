@@ -28,7 +28,7 @@
  * @return void
  */
 function local_debugtoolbar_after_config() {
-    global $PAGE;
+    global $PAGE, $PERF;
 
     if (empty(get_config('local_debugtoolbar', 'enable')) === true) {
         // Return nothing if plugin has been disabled.
@@ -37,7 +37,7 @@ function local_debugtoolbar_after_config() {
 
     $PAGE->add_body_class('local-debugtoolbar-enabled');
 
-    $_SESSION['local_debugtoolbar'] = array('errors' => [], 'warnings' => [], 'notices' => [], 'deprecated' => []);
+    $PERF->local_debugtoolbar = array('errors' => [], 'warnings' => [], 'notices' => [], 'deprecated' => []);
 
     if (empty(get_config('local_debugtoolbar', 'enable_error_handler')) === false) {
         set_error_handler('local_debugtoolbar_error_handler');
@@ -56,6 +56,8 @@ function local_debugtoolbar_after_config() {
  * @return bool
  */
 function local_debugtoolbar_error_handler($errno, $errstr, $errfile, $errline, $errcontext = null) {
+    global $PERF;
+
     switch ($errno) {
         case E_RECOVERABLE_ERROR:
         case E_STRICT:
@@ -86,10 +88,10 @@ function local_debugtoolbar_error_handler($errno, $errstr, $errfile, $errline, $
         case E_DEPRECATED:
             $errstr = htmlspecialchars($errstr);
             $format = 'PHP %s: %s in %s on line %s';
-            $_SESSION['local_debugtoolbar'][$type][] = sprintf($format, ucfirst($type), $errstr, $errfile, $errline);
+            $PERF->local_debugtoolbar[$type][] = sprintf($format, ucfirst($type), $errstr, $errfile, $errline);
             break;
         default:
-            $_SESSION['local_debugtoolbar'][$type][] = sprintf('MOODLE %s: %s', ucfirst($type), $errstr);
+            $PERF->local_debugtoolbar[$type][] = sprintf('MOODLE %s: %s', ucfirst($type), $errstr);
     }
 
     // Disable default PHP handler.
@@ -172,7 +174,7 @@ function local_debugtoolbar_before_footer() {
         $data->records[$i] = (object) ['title' => $label, 'fa' => 'exclamation-circle', 'items' => []];
         foreach (['errors' , 'warnings', 'notices', 'deprecated'] as $type) {
             $style = '';
-            $count = count($_SESSION['local_debugtoolbar'][$type]);
+            $count = count($PERF->local_debugtoolbar[$type]);
             $label = get_string(sprintf('%s_X', $type), 'local_debugtoolbar', $count);
 
             if ($count > 0) {
@@ -184,7 +186,7 @@ function local_debugtoolbar_before_footer() {
                 }
 
                 $alerts = (object) ['type' => $type, 'items' => []];
-                foreach ($_SESSION['local_debugtoolbar'][$type] as $alert) {
+                foreach ($PERF->local_debugtoolbar[$type] as $alert) {
                     $alerts->items[] = $alert;
                 }
                 $data->alerts[] = $alerts;
