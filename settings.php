@@ -35,13 +35,18 @@ if ($hassiteconfig) {
     $settings->add(new admin_setting_heading('local_debugtoolbar/header', get_string('settings'), $content));
 
     // Add a checkbox to enable/disable module.
-    $settings->add(new admin_setting_plugin_activation('local_debugtoolbar/enable',
-            get_string('enable_debugtoolbar', 'local_debugtoolbar'), '', 0));
+    $name = 'local_debugtoolbar/enable';
+    $label = get_string('enable_debugtoolbar', 'local_debugtoolbar');
+    $description = '';
+    $default = 0;
+    $settings->add(new admin_setting_plugin_activation($name, $label, $description, $default));
 
     // Add a checkbox to enable/disable error handler.
-    $settings->add(new admin_setting_configcheckbox('local_debugtoolbar/enable_error_handler',
-            get_string('enable_error_handler', 'local_debugtoolbar'),
-            get_string('enable_error_handler_description', 'local_debugtoolbar'), 0));
+    $name = 'local_debugtoolbar/enable_error_handler';
+    $label = get_string('enable_error_handler', 'local_debugtoolbar');
+    $description = get_string('enable_error_handler_description', 'local_debugtoolbar');
+    $default = 0;
+    $settings->add(new admin_setting_configcheckbox($name, $label, $description, $default));
 
     // Add a field to set execution time warning threshold.
     $name = 'local_debugtoolbar/realtime_warning_threshold';
