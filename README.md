@@ -19,8 +19,9 @@ After you have installed this local plugin, you should see a new option in the s
 > Site administration -> Plugins -> Local plugins -> Debug toolbar
 
 
-## Screenshot
-![Screenshot](.github/screenshots/screenshot001.png)
+## Screenshots
+![DebugToolbar on homepage](.github/screenshots/screenshot001.png)
+![Admin settings page](.github/screenshots/screenshot002.png)
 
 
 ## Reporting security issues
