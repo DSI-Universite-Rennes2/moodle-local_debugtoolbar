@@ -42,4 +42,32 @@ if ($hassiteconfig) {
     $settings->add(new admin_setting_configcheckbox('local_debugtoolbar/enable_error_handler',
             get_string('enable_error_handler', 'local_debugtoolbar'),
             get_string('enable_error_handler_description', 'local_debugtoolbar'), 0));
+
+    // Add a field to set execution time warning threshold.
+    $name = 'local_debugtoolbar/realtime_warning_threshold';
+    $label = get_string('realtime_warning_threshold', 'local_debugtoolbar');
+    $description = get_string('realtime_warning_threshold_description', 'local_debugtoolbar');
+    $default = .2;
+    $settings->add(new admin_setting_configtext($name, $label, $description, $default, PARAM_FLOAT));
+
+    // Add a field to set execution time critical threshold.
+    $name = 'local_debugtoolbar/realtime_critical_threshold';
+    $label = get_string('realtime_critical_threshold', 'local_debugtoolbar');
+    $description = get_string('realtime_critical_threshold_description', 'local_debugtoolbar');
+    $default = 2;
+    $settings->add(new admin_setting_configtext($name, $label, $description, $default, PARAM_FLOAT));
+
+    // Add a field to set database queries warning threshold.
+    $name = 'local_debugtoolbar/dbqueries_warning_threshold';
+    $label = get_string('dbqueries_warning_threshold', 'local_debugtoolbar');
+    $description = get_string('dbqueries_warning_threshold_description', 'local_debugtoolbar');
+    $default = 50;
+    $settings->add(new admin_setting_configtext($name, $label, $description, $default, PARAM_INT));
+
+    // Add a field to set database queries critical threshold.
+    $name = 'local_debugtoolbar/dbqueries_critical_threshold';
+    $label = get_string('dbqueries_critical_threshold', 'local_debugtoolbar');
+    $description = get_string('dbqueries_critical_threshold_description', 'local_debugtoolbar');
+    $default = 100;
+    $settings->add(new admin_setting_configtext($name, $label, $description, $default, PARAM_INT));
 }

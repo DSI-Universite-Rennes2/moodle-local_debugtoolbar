@@ -209,10 +209,10 @@ function local_debugtoolbar_before_footer() {
     if (isset($ticks)) {
         $data->records[$i]->items[] = (object) ['title' => $ticks];
     }
-    if ($performance['realtime'] > 2) {
+    if ($performance['realtime'] > get_config('local_debugtoolbar', 'realtime_critical_threshold')) {
         $data->records[$i]->style = 'btn-danger';
         $data->records[$i]->items[0]->style = 'bg-danger';
-    } else if ($performance['realtime'] > .2) {
+    } else if ($performance['realtime'] > get_config('local_debugtoolbar', 'realtime_warning_threshold')) {
         $data->records[$i]->style = 'btn-warning';
         $data->records[$i]->items[0]->style = 'bg-warning';
     }
@@ -246,10 +246,10 @@ function local_debugtoolbar_before_footer() {
         'title' => get_string('db_queries_time_X', 'local_debugtoolbar', $performance['dbtime'])
     ];
 
-    if ($countread >= 100) {
+    if ($countread >= get_config('local_debugtoolbar', 'dbqueries_critical_threshold')) {
         $data->records[$i]->style = 'btn-danger';
         $data->records[$i]->items[0]->style = 'bg-danger';
-    } else if ($countread >= 50) {
+    } else if ($countread >= get_config('local_debugtoolbar', 'dbqueries_warning_threshold')) {
         $data->records[$i]->style = 'btn-warning';
         $data->records[$i]->items[0]->style = 'bg-warning';
     }
