@@ -113,9 +113,9 @@ function local_debugtoolbar_before_footer() {
 
     require($CFG->dirroot.'/version.php');
 
-    if (function_exists('posix_times')) {
-        $performance = get_performance_info();
+    $performance = get_performance_info();
 
+    if (function_exists('posix_times')) {
         $format = 'Ticks: %s user: %s sys: %s cuser: %s csys: %s';
         $ticks = sprintf($format, $performance['ticks'], $performance['utime'], $performance['stime'],
             $performance['cutime'], $performance['cstime']);
