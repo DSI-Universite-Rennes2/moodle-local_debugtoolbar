@@ -21,24 +21,36 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-define(['jquery', 'core/notification', 'core/modal_factory'], function($, Notification, ModalFactory) {
+define(['core/notification', 'core/modal_factory'], function(Notification, ModalFactory) {
     return {
         initialize: function() {
-            $('table.cachesused:eq(0)').attr('id', 'local-debugtoolbar-cache');
-            $('table.cachesused:eq(1)').attr('id', 'local-debugtoolbar-sessions');
+            let cacheTable = document.querySelectorAll('table.cachesused');
+            if (cacheTable[0]) {
+                cacheTable[0].setAttribute('id', 'local-debugtoolbar-cache');
+            }
 
-            $('.local-debugtoolbar-modal').on('click', function(e) {
-                ModalFactory.create({
-                    type: ModalFactory.types.ALERT,
-                    title: $(e.currentTarget).text(),
-                    body: $($(e.currentTarget).attr('data-targetid')),
-                    large: true
-                })
-                .then(async function(modal) {
-                    modal.show();
+            if (cacheTable[1]) {
+                cacheTable[1].setAttribute('id', 'local-debugtoolbar-sessions');
+            }
 
-                    return modal;
-                }).catch(Notification.exception);
+            let modals = document.getElementsByClassName('local-debugtoolbar-modal');
+            modals.forEach(function(modal) {
+                modal.addEventListener('click', function(e) {
+                    let targetid = e.currentTarget.getAttribute('data-targetid');
+                    var targetElement = document.getElementById(targetid);
+
+                    ModalFactory.create({
+                        type: ModalFactory.types.ALERT,
+                        title: e.currentTarget.textContent,
+                        body: targetElement,
+                        large: true
+                    })
+                    .then(async function(modal) {
+                        modal.show();
+
+                        return modal;
+                    }).catch(Notification.exception);
+                });
             });
         }
     };

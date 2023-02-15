@@ -193,7 +193,7 @@ function local_debugtoolbar_before_footer() {
                 }
                 $data->alerts[] = $alerts;
 
-                $modal = sprintf('#local-debugtoolbar-alerts-%s', $type);
+                $modal = sprintf('local-debugtoolbar-alerts-%s', $type);
                 $data->records[$i]->items[] = (object) ['title' => $label, 'style' => $style, 'modal' => $modal];
             } else {
                 $data->records[$i]->items[] = (object) ['title' => $label, 'style' => $style];
@@ -280,7 +280,7 @@ function local_debugtoolbar_before_footer() {
         'title' => get_string('included_X_files', 'local_debugtoolbar', $performance['includecount'])
     ];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('more...', 'local_debugtoolbar'), 'modal' => '#local-debugtoolbar-cache'
+        'title' => get_string('more...', 'local_debugtoolbar'), 'modal' => 'local-debugtoolbar-cache'
     ];
 
     // String.
@@ -316,7 +316,7 @@ function local_debugtoolbar_before_footer() {
         'title' => get_string('session_wait_X', 'local_debugtoolbar', number_format($PERF->sessionlock['wait'], 3))
     ];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('more...', 'local_debugtoolbar'), 'modal' => '#local-debugtoolbar-sessions'
+        'title' => get_string('more...', 'local_debugtoolbar'), 'modal' => 'local-debugtoolbar-sessions'
     ];
 
     // User.
