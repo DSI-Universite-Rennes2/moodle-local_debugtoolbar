@@ -1,0 +1,7 @@
+# Define some files to exclude when cloning with the --prefer-dist option.
+
+/.editorconfig      export-ignore
+/.gitattributes     export-ignore
+/.github            export-ignore
+/.gitignore         export-ignore
+/tests              export-ignore
