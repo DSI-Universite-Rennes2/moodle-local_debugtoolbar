@@ -37,7 +37,7 @@ function local_debugtoolbar_after_config() {
 
     $PAGE->add_body_class('local-debugtoolbar-enabled');
 
-    $PERF->local_debugtoolbar = array('errors' => [], 'warnings' => [], 'notices' => [], 'deprecated' => []);
+    $PERF->local_debugtoolbar = ['errors' => [], 'warnings' => [], 'notices' => [], 'deprecated' => []];
 
     if (empty(get_config('local_debugtoolbar', 'enable_error_handler')) === false) {
         set_error_handler('local_debugtoolbar_error_handler');
@@ -124,7 +124,7 @@ function local_debugtoolbar_before_footer() {
     }
 
     $data = new stdClass();
-    $data->records = array();
+    $data->records = [];
 
     // Moodle.
     $i = 0;
@@ -135,7 +135,7 @@ function local_debugtoolbar_before_footer() {
     $data->records[$i]->items[] = (object) ['title' => get_string('maturity_X', 'local_debugtoolbar', $maturitylabel)];
     $data->records[$i]->items[] = (object) ['title' => get_string('php_X', 'local_debugtoolbar', phpversion())];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('http_response_code_X', 'local_debugtoolbar', http_response_code())
+        'title' => get_string('http_response_code_X', 'local_debugtoolbar', http_response_code()),
     ];
 
     switch ($maturity) {
@@ -159,7 +159,7 @@ function local_debugtoolbar_before_footer() {
         }
     }
 
-    $parameters = array('minmaturity' => $CFG->updateminmaturity, 'notifybuilds' => $CFG->updatenotifybuilds);
+    $parameters = ['minmaturity' => $CFG->updateminmaturity, 'notifybuilds' => $CFG->updatenotifybuilds];
     if (empty($updateschecker->get_update_info('core', $parameters)) === false) {
         $data->records[$i]->style = 'btn-info';
         $item = (object) ['title' => get_string('updateavailable', 'admin'), 'style' => 'bg-info'];
@@ -169,7 +169,7 @@ function local_debugtoolbar_before_footer() {
     // PHP alerts.
     if (empty(get_config('local_debugtoolbar', 'enable_error_handler')) === false) {
         $i++;
-        $data->alerts = array();
+        $data->alerts = [];
         $label = get_string('no_alerts', 'local_debugtoolbar');
         $data->records[$i] = (object) ['title' => $label, 'fa' => 'exclamation-circle', 'items' => []];
 
@@ -206,10 +206,10 @@ function local_debugtoolbar_before_footer() {
     $label = get_string('X_secs', 'local_debugtoolbar', $performance['realtime']);
     $data->records[$i] = (object) ['title' => $label, 'fa' => 'clock-o', 'items' => []];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('total_time_X', 'local_debugtoolbar', $performance['realtime'])
+        'title' => get_string('total_time_X', 'local_debugtoolbar', $performance['realtime']),
     ];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('load_average_X', 'local_debugtoolbar', $performance['serverload'])
+        'title' => get_string('load_average_X', 'local_debugtoolbar', $performance['serverload']),
     ];
     if (isset($ticks)) {
         $data->records[$i]->items[] = (object) ['title' => $ticks];
@@ -227,16 +227,16 @@ function local_debugtoolbar_before_footer() {
     $label = display_size($performance['memory_total']);
     $data->records[$i] = (object) ['title' => $label, 'fa' => 'microchip', 'items' => []];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('ram_X', 'local_debugtoolbar', display_size($performance['memory_total']))
+        'title' => get_string('ram_X', 'local_debugtoolbar', display_size($performance['memory_total'])),
     ];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('ram_growth_X', 'local_debugtoolbar', display_size($performance['memory_growth']))
+        'title' => get_string('ram_growth_X', 'local_debugtoolbar', display_size($performance['memory_growth'])),
     ];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('ram_peak_X', 'local_debugtoolbar', display_size($performance['memory_peak']))
+        'title' => get_string('ram_peak_X', 'local_debugtoolbar', display_size($performance['memory_peak'])),
     ];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('extra_memory_limit_X', 'local_debugtoolbar', $CFG->extramemorylimit)
+        'title' => get_string('extra_memory_limit_X', 'local_debugtoolbar', $CFG->extramemorylimit),
     ];
 
     // Database.
@@ -248,7 +248,7 @@ function local_debugtoolbar_before_footer() {
     $data->records[$i]->items[] = (object) ['title' => get_string('db_reads_X', 'local_debugtoolbar', $countread)];
     $data->records[$i]->items[] = (object) ['title' => get_string('db_writes_X', 'local_debugtoolbar', $countwrite)];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('db_queries_time_X', 'local_debugtoolbar', $performance['dbtime'])
+        'title' => get_string('db_queries_time_X', 'local_debugtoolbar', $performance['dbtime']),
     ];
 
     if ($countread >= get_config('local_debugtoolbar', 'dbqueries_critical_threshold')) {
@@ -262,7 +262,7 @@ function local_debugtoolbar_before_footer() {
     // Cache.
     $i++;
     list($cachehits, $cachemisses, $cachesets) = explode('/', $performance['cachesused']);
-    foreach (array('cachehits', 'cachemisses', 'cachesets') as $variable) {
+    foreach (['cachehits', 'cachemisses', 'cachesets'] as $variable) {
         ${$variable} = trim(${$variable});
     }
     $cachecalls = $cachehits + $cachemisses;
@@ -277,33 +277,34 @@ function local_debugtoolbar_before_footer() {
     $data->records[$i]->items[] = (object) ['title' => get_string('cache_misses_X', 'local_debugtoolbar', $cachemisses)];
     $data->records[$i]->items[] = (object) ['title' => get_string('cache_sets_X', 'local_debugtoolbar', $cachesets)];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('included_X_files', 'local_debugtoolbar', $performance['includecount'])
+        'title' => get_string('included_X_files', 'local_debugtoolbar', $performance['includecount']),
     ];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('more...', 'local_debugtoolbar'), 'modal' => 'local-debugtoolbar-cache'
+        'title' => get_string('more...', 'local_debugtoolbar'), 'modal' => 'local-debugtoolbar-cache',
     ];
 
     // String.
     $i++;
     $label = get_string('filters_and_strings', 'local_debugtoolbar');
     $data->records[$i] = (object) ['title' => $label, 'fa' => 'book', 'items' => []];
+    $label = get_string('contexts_for_which_filters_were_loaded_X', 'local_debugtoolbar', $performance['contextswithfilters']);
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('contexts_for_which_filters_were_loaded_X', 'local_debugtoolbar', $performance['contextswithfilters'])
+        'title' => $label,
     ];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('filters_created_X', 'local_debugtoolbar', $performance['filterscreated'])
+        'title' => get_string('filters_created_X', 'local_debugtoolbar', $performance['filterscreated']),
     ];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('pieces_of_content_filtered_X', 'local_debugtoolbar', $performance['textsfiltered'])
+        'title' => get_string('pieces_of_content_filtered_X', 'local_debugtoolbar', $performance['textsfiltered']),
     ];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('strings_filtered_X', 'local_debugtoolbar', $performance['stringsfiltered'])
+        'title' => get_string('strings_filtered_X', 'local_debugtoolbar', $performance['stringsfiltered']),
     ];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('get_string_calls_X', 'local_debugtoolbar', $performance['langcountgetstring'])
+        'title' => get_string('get_string_calls_X', 'local_debugtoolbar', $performance['langcountgetstring']),
     ];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('included_X_files', 'local_debugtoolbar', $performance['includecount'])
+        'title' => get_string('included_X_files', 'local_debugtoolbar', $performance['includecount']),
     ];
 
     // Sessions.
@@ -313,10 +314,10 @@ function local_debugtoolbar_before_footer() {
     $si = \core\session\manager::get_performance_info();
     $data->records[$i]->items[] = (object) ['title' => $si['txt']];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('session_wait_X', 'local_debugtoolbar', number_format($PERF->sessionlock['wait'], 3))
+        'title' => get_string('session_wait_X', 'local_debugtoolbar', number_format($PERF->sessionlock['wait'], 3)),
     ];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('more...', 'local_debugtoolbar'), 'modal' => 'local-debugtoolbar-sessions'
+        'title' => get_string('more...', 'local_debugtoolbar'), 'modal' => 'local-debugtoolbar-sessions',
     ];
 
     // User.
@@ -331,7 +332,7 @@ function local_debugtoolbar_before_footer() {
     $data->records[$i]->items[] = (object) ['title' => get_string('general_type_X', 'local_debugtoolbar', $PAGE->pagelayout)];
     $data->records[$i]->items[] = (object) ['title' => get_string('contextid_X', 'local_debugtoolbar', $PAGE->context->id)];
     $data->records[$i]->items[] = (object) [
-        'title' => get_string('context_X', 'local_debugtoolbar', $PAGE->context->get_context_name())
+        'title' => get_string('context_X', 'local_debugtoolbar', $PAGE->context->get_context_name()),
     ];
     $data->records[$i]->items[] = (object) ['title' => get_string('page_type_X', 'local_debugtoolbar', $PAGE->pagetype)];
     if ($PAGE->subpage) {

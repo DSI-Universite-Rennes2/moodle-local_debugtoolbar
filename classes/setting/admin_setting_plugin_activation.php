@@ -40,7 +40,7 @@ class admin_setting_plugin_activation extends admin_setting_configcheckbox {
      * @return array
      */
     public function get_overrided_settings() {
-        $settings = array();
+        $settings = [];
         $settings['debug'] = DEBUG_DEVELOPER;
         $settings['debugdisplay'] = true;
         $settings['perfdebug'] = 15;

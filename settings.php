@@ -31,7 +31,7 @@ if ($hassiteconfig) {
     $ADMIN->add('localplugins', $settings);
 
     // Add warnings about usage.
-    $content = html_writer::tag('div', get_string('usage_warning', 'local_debugtoolbar'), array('class' => 'alert alert-warning'));
+    $content = html_writer::tag('div', get_string('usage_warning', 'local_debugtoolbar'), ['class' => 'alert alert-warning']);
     $settings->add(new admin_setting_heading('local_debugtoolbar/header', get_string('settings'), $content));
 
     // Add a checkbox to enable/disable module.
