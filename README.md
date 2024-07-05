@@ -1,4 +1,6 @@
 # local_debugtoolbar
+Available releases can be downloaded and installed from https://moodle.org/plugins/local_debugtoolbar
+
 
 ## Description
 
