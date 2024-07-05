@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2023101600;
-$plugin->release = '1.1.2';
+$plugin->version = 2024070500;
+$plugin->release = '1.2.0';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->requires = 2022041900; // Moodle 4.0 release and upwards.
+$plugin->requires = 2024042200; // Moodle 4.4 release and upwards.
 $plugin->component = 'local_debugtoolbar';
