@@ -22,24 +22,23 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Debug toolbar';
-$string['privacy:metadata'] = 'The debug toolbar plugin does not store any personal data.';
-
+$string['X_queries_in_Y_secs'] = '{$a->queries} queries in {$a->time} secs';
+$string['X_secs'] = '{$a} secs';
 $string['cache'] = 'Cache';
 $string['cache_hits_X'] = 'Cache hits: {$a}';
 $string['cache_misses_X'] = 'Cache misses: {$a}';
 $string['cache_ratio_X'] = 'Cache ({$a})';
 $string['cache_sets_X'] = 'Cache sets: {$a}';
+$string['context_X'] = 'Context: {$a}';
 $string['contextid_X'] = 'Context id: {$a}';
 $string['contexts_for_which_filters_were_loaded_X'] = 'Contexts for which filters were loaded: {$a}';
-$string['context_X'] = 'Context: {$a}';
-$string['dbqueries_critical_threshold'] = 'Database queries critical threshold';
-$string['dbqueries_critical_threshold_description'] = 'Integer to define database queries critical threshold';
 $string['db_queries_time_X'] = 'DB queries time: {$a} secs';
-$string['dbqueries_warning_threshold'] = 'Database queries warning threshold';
-$string['dbqueries_warning_threshold_description'] = 'Integer to define database queries warning threshold';
 $string['db_reads_X'] = 'DB reads: {$a}';
 $string['db_writes_X'] = 'DB writes: {$a}';
+$string['dbqueries_critical_threshold'] = 'Database queries critical threshold';
+$string['dbqueries_critical_threshold_description'] = 'Integer to define database queries critical threshold';
+$string['dbqueries_warning_threshold'] = 'Database queries warning threshold';
+$string['dbqueries_warning_threshold_description'] = 'Integer to define database queries warning threshold';
 $string['deprecated_X'] = 'Deprecated: {$a}';
 $string['enable_debugtoolbar'] = 'Enable the debug toolbar';
 $string['enable_error_handler'] = 'Enable PHP error handler';
@@ -55,20 +54,22 @@ $string['included_X_files'] = 'Included {$a} files';
 $string['load_average_X'] = 'Load average: {$a}';
 $string['maturity_X'] = 'Maturity: {$a}';
 $string['more...'] = 'More...';
-$string['notices_X'] = 'Notices: {$a}';
 $string['no_alerts'] = 'No alerts';
+$string['notices_X'] = 'Notices: {$a}';
 $string['page_type_X'] = 'Page type: {$a}';
 $string['php_X'] = 'PHP: {$a}';
 $string['pieces_of_content_filtered_X'] = 'Pieces of content filtered: {$a}';
+$string['pluginname'] = 'Debug toolbar';
+$string['privacy:metadata'] = 'The debug toolbar plugin does not store any personal data.';
+$string['ram_X'] = 'RAM: {$a}';
 $string['ram_growth_X'] = 'RAM growth: {$a}';
 $string['ram_peak_X'] = 'RAM peak: {$a}';
-$string['ram_X'] = 'RAM: {$a}';
 $string['realtime_critical_threshold'] = 'Execution time critical threshold';
 $string['realtime_critical_threshold_description'] = 'Float in seconds to define execution time critical threshold';
 $string['realtime_warning_threshold'] = 'Execution time warning threshold';
 $string['realtime_warning_threshold_description'] = 'Float in seconds to define execution time warning threshold';
-$string['sessions'] = 'Sessions';
 $string['session_wait_X'] = 'Session wait: {$a} secs';
+$string['sessions'] = 'Sessions';
 $string['site_admin_X'] = 'Site admin: {$a}';
 $string['strings_filtered_X'] = 'Strings filtered: {$a}';
 $string['subpage_X'] = 'Sub-page: {$a}';
@@ -77,5 +78,3 @@ $string['usage_warning'] = '<strong>DO NOT ENABLE THIS PLUGIN IN A PRODUCTION EN
 This plugin will override the following variables : <code>$CFG->debug</code>, <code>$CFG->debugdisplay</code> and <code>$CFG->perfdebug</code>.';
 $string['version_X'] = 'Version: {$a}';
 $string['warnings_X'] = 'Warnings: {$a}';
-$string['X_queries_in_Y_secs'] = '{$a->queries} queries in {$a->time} secs';
-$string['X_secs'] = '{$a} secs';
