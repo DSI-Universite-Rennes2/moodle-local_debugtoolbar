@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="MoodleCore">
+    <!-- We don't want to analyse these -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/Tests/fixtures/*</exclude-pattern>
+    <exclude-pattern>*/Tests/*/fixtures/*</exclude-pattern>
+
+    <rule ref="moodle"/>
+    <config name="testVersion" value="8.1-"/>
+</ruleset>

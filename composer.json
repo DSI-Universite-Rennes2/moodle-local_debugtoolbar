@@ -1,0 +1,14 @@
+{
+    "name": "universiterennes2/moodle-local_debugtoolbar",
+    "description": "Moodle plugin to create a debug toolbar on the footer page.",
+    "license": "GPL-3.0-or-later",
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require-dev": {
+        "moodlehq/moodle-cs": "3.*",
+        "phpcompatibility/php-compatibility": "dev-develop"
+    }
+}
