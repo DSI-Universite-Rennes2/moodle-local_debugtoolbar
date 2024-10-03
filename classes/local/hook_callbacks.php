@@ -84,7 +84,7 @@ class hook_callbacks {
 
         // Check update only once a day.
         $updateschecker = \core\update\checker::instance();
-        if ($updateschecker->get_last_timefetched() < (time() + DAYSECS)) {
+        if ($updateschecker->get_last_timefetched() < (time() - DAYSECS)) {
             if ($updateschecker->enabled()) {
                 $updateschecker->fetch();
             }
