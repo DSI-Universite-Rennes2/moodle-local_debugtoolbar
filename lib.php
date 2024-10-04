@@ -153,7 +153,7 @@ function local_debugtoolbar_before_footer() {
 
     // Check update only once a day.
     $updateschecker = \core\update\checker::instance();
-    if ($updateschecker->get_last_timefetched() < (time() + DAYSECS)) {
+    if ($updateschecker->get_last_timefetched() < (time() - DAYSECS)) {
         if ($updateschecker->enabled()) {
             $updateschecker->fetch();
         }
