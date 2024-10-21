@@ -23,28 +23,6 @@
  */
 
 /**
- * Setup error handler as soon as practical on every moodle bootstrap after config has been loaded.
- *
- * @return void
- */
-function local_debugtoolbar_after_config() {
-    global $PAGE, $PERF;
-
-    if (empty(get_config('local_debugtoolbar', 'enable')) === true) {
-        // Return nothing if plugin has been disabled.
-        return;
-    }
-
-    $PAGE->add_body_class('local-debugtoolbar-enabled');
-
-    $PERF->local_debugtoolbar = ['errors' => [], 'warnings' => [], 'notices' => [], 'deprecated' => []];
-
-    if (empty(get_config('local_debugtoolbar', 'enable_error_handler')) === false) {
-        set_error_handler('local_debugtoolbar_error_handler');
-    }
-}
-
-/**
  * Function to handle and catch almost all PHP errors.
  *
  * @param int    $errno      The level of the error raised, as an integer.

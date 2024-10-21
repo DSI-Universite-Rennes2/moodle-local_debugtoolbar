@@ -16,6 +16,7 @@
 
 namespace local_debugtoolbar\local;
 
+use Exception;
 use core\hook\output\before_footer_html_generation;
 use stdClass;
 
@@ -27,6 +28,37 @@ use stdClass;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class hook_callbacks {
+    /**
+     * Setup error handler as soon as practical on every moodle bootstrap after config has been loaded.
+     *
+     * @return void
+     */
+    public static function after_config(): void {
+        global $CFG, $PAGE, $PERF;
+
+        try {
+            if (empty(get_config('local_debugtoolbar', 'enable')) === true) {
+                // Return nothing if plugin has been disabled.
+                return;
+            }
+        } catch (Exception $exception) {
+            // Table mdl_config is probably not available yet (e.g., installation processus).
+            return;
+        }
+
+        $PAGE->add_body_class('local-debugtoolbar-enabled');
+
+        $PERF->local_debugtoolbar = ['errors' => [], 'warnings' => [], 'notices' => [], 'deprecated' => []];
+
+        if (empty(get_config('local_debugtoolbar', 'enable_error_handler')) === false) {
+            if (is_callable('local_debugtoolbar_error_handler') === false) {
+                require_once($CFG->dirroot.'/local/debugtoolbar/lib.php');
+            }
+
+            set_error_handler('local_debugtoolbar_error_handler');
+        }
+    }
+
     /**
      * Gather performance data and return HTML string to render the debug toolbar.
      *
