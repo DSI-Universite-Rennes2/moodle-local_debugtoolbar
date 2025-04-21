@@ -36,40 +36,41 @@
 function local_debugtoolbar_error_handler($errno, $errstr, $errfile, $errline, $errcontext = null) {
     global $PERF;
 
-    switch ($errno) {
-        case E_RECOVERABLE_ERROR:
-        case E_STRICT:
-        case E_USER_ERROR:
-            $type = 'errors';
-            break;
-        case E_WARNING:
-        case E_USER_WARNING:
-            $type = 'warnings';
-            break;
-        case E_NOTICE:
-        case E_USER_NOTICE:
-            $type = 'notices';
-            break;
-        case E_DEPRECATED:
-        case E_USER_DEPRECATED:
-            $type = 'deprecated';
-            break;
-        default:
-            return false;
+    $errors = [E_RECOVERABLE_ERROR, E_USER_ERROR];
+    if (PHP_MAJOR_VERSION <= 8 && PHP_MINOR_VERSION <= 3) {
+        // E_STRICT constant is deprecated since PHP 8.4.
+        $errors[] = E_STRICT;
     }
 
-    switch ($errno) {
-        case E_RECOVERABLE_ERROR:
-        case E_STRICT:
-        case E_WARNING:
-        case E_NOTICE:
-        case E_DEPRECATED:
-            $errstr = htmlspecialchars($errstr);
-            $format = 'PHP %s: %s in %s on line %s';
-            $PERF->local_debugtoolbar[$type][] = sprintf($format, ucfirst($type), $errstr, $errfile, $errline);
-            break;
-        default:
-            $PERF->local_debugtoolbar[$type][] = sprintf('MOODLE %s: %s', ucfirst($type), $errstr);
+    $warnings = [E_WARNING, E_USER_WARNING];
+    $notices = [E_NOTICE, E_USER_NOTICE];
+    $deprecated = [E_DEPRECATED, E_USER_DEPRECATED];
+
+    if (in_array($errno, $errors, $strict = true) === true) {
+        $type = 'errors';
+    } else if (in_array($errno, $warnings, $strict = true) === true) {
+        $type = 'warnings';
+    } else if (in_array($errno, $notices, $strict = true) === true) {
+        $type = 'notices';
+    } else if (in_array($errno, $deprecated, $strict = true) === true) {
+        $type = 'deprecated';
+    } else {
+        // Unkown error type.
+        return false;
+    }
+
+    $errortypes = [E_RECOVERABLE_ERROR, E_WARNING, E_NOTICE, E_DEPRECATED];
+    if (PHP_MAJOR_VERSION <= 8 && PHP_MINOR_VERSION <= 3) {
+        // E_STRICT constant is deprecated since PHP 8.4.
+        $errortypes[] = E_STRICT;
+    }
+
+    if (in_array($errno, $errortypes, $strict = true) === true) {
+        $errstr = htmlspecialchars($errstr);
+        $format = 'PHP %s: %s in %s on line %s';
+        $PERF->local_debugtoolbar[$type][] = sprintf($format, ucfirst($type), $errstr, $errfile, $errline);
+    } else {
+        $PERF->local_debugtoolbar[$type][] = sprintf('MOODLE %s: %s', ucfirst($type), $errstr);
     }
 
     // Disable default PHP handler.
