@@ -38,18 +38,18 @@
     {{#records}}
     <li class="list-inline-item">
         <div class="btn-group dropup">
-            <button type="button" class="btn btn-secondary_ dropdown-toggle text-light {{style}}" data-bs-toggle="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn dropdown-toggle {{style}} {{^style}}bg-dark text-light{{/style}}" data-bs-toggle="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-{{ fa }} me-1" role="img" aria-labelledby="local-debugtoolbar-fa-{{ fa }}-label"></i>
                 <span id="local-debugtoolbar-fa-{{ fa }}-label" class="me-1">{{ title }}</span>
             </button>
-            <div class="dropdown-menu bg-dark">
+            <div class="dropdown-menu bg-dark text-light">
                 <!-- Dropdown menu links -->
                 {{#items}}
                     {{#modal}}
-                        <button class="dropdown-item text-light {{style}} local-debugtoolbar-modal" data-targetid="{{ modal }}" type="button">{{ title }}</button>
+                        <button class="dropdown-item {{substyle}} {{^substyle}}text-light{{/substyle}} local-debugtoolbar-modal" data-targetid="{{ modal }}" type="button">{{ title }}</button>
                     {{/modal}}
                     {{^modal}}
-                        <span class="dropdown-item text-light {{style}}">{{ title }}</span>
+                        <span class="dropdown-item {{substyle}} {{^substyle}}text-light{{/substyle}}">{{ title }}</span>
                     {{/modal}}
                 {{/items}}
             </div>

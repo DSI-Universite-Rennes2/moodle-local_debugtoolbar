@@ -107,16 +107,17 @@ class hook_callbacks {
         ];
 
         switch ($maturity) {
-            case MATURITY_STABLE:
-                break;
             case MATURITY_ALPHA:
-                $data->records[$i]->items[1]->style = 'bg-danger';
+                $data->records[$i]->items[1]->substyle = 'bg-danger';
                 $data->records[$i]->style = 'btn-danger';
                 break;
             case MATURITY_BETA:
-            default:
-                $data->records[$i]->items[1]->style = 'bg-warning';
+                $data->records[$i]->items[1]->substyle = 'bg-warning text-dark';
                 $data->records[$i]->style = 'btn-warning';
+                break;
+            case MATURITY_STABLE:
+            default:
+                $data->records[$i]->style = null;
         }
 
         // Check update only once a day.
@@ -143,12 +144,14 @@ class hook_callbacks {
 
             $errortypes = ['errors' => 'danger', 'warnings' => 'warning', 'deprecated' => 'warning', 'notices' => 'info'];
             foreach ($errortypes as $type => $leveltype) {
-                $style = '';
                 $count = count($PERF->local_debugtoolbar[$type]);
                 $label = get_string(sprintf('%s_X', $type), 'local_debugtoolbar', $count);
 
                 if ($count > 0) {
-                    $style = sprintf('bg-%s', $leveltype);
+                    $style = sprintf('bg-%s text-light', $leveltype);
+                    if ($leveltype === 'warning') {
+                        $style = 'bg-warning text-dark';
+                    }
 
                     if (isset($data->records[$i]->style) === false) {
                         $data->records[$i]->title = $label;
@@ -162,9 +165,9 @@ class hook_callbacks {
                     $data->alerts[] = $alerts;
 
                     $modal = sprintf('local-debugtoolbar-alerts-%s', $type);
-                    $data->records[$i]->items[] = (object) ['title' => $label, 'style' => $style, 'modal' => $modal];
+                    $data->records[$i]->items[] = (object) ['title' => $label, 'substyle' => $style, 'modal' => $modal];
                 } else {
-                    $data->records[$i]->items[] = (object) ['title' => $label, 'style' => $style];
+                    $data->records[$i]->items[] = (object) ['title' => $label];
                 }
             }
         }
@@ -184,10 +187,10 @@ class hook_callbacks {
         }
         if ($performance['realtime'] > get_config('local_debugtoolbar', 'realtime_critical_threshold')) {
             $data->records[$i]->style = 'btn-danger';
-            $data->records[$i]->items[0]->style = 'bg-danger';
+            $data->records[$i]->items[0]->substyle = 'bg-danger text-light';
         } else if ($performance['realtime'] > get_config('local_debugtoolbar', 'realtime_warning_threshold')) {
             $data->records[$i]->style = 'btn-warning';
-            $data->records[$i]->items[0]->style = 'bg-warning';
+            $data->records[$i]->items[0]->substyle = 'bg-warning text-dark';
         }
 
         // Memory usage.
@@ -221,10 +224,10 @@ class hook_callbacks {
 
         if ($countread >= get_config('local_debugtoolbar', 'dbqueries_critical_threshold')) {
             $data->records[$i]->style = 'btn-danger';
-            $data->records[$i]->items[0]->style = 'bg-danger';
+            $data->records[$i]->items[0]->substyle = 'bg-danger text-light';
         } else if ($countread >= get_config('local_debugtoolbar', 'dbqueries_warning_threshold')) {
             $data->records[$i]->style = 'btn-warning';
-            $data->records[$i]->items[0]->style = 'bg-warning';
+            $data->records[$i]->items[0]->substyle = 'bg-warning text-dark';
         }
 
         // Cache.
