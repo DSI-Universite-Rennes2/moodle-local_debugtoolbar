@@ -71,8 +71,13 @@ class hook_callbacks {
     public static function before_footer(before_footer_html_generation $hook): void {
         global $CFG, $OUTPUT, $PAGE, $PERF, $USER;
 
-        if (empty(get_config('local_debugtoolbar', 'enable')) === true) {
-            // Return nothing if plugin has been disabled.
+        try {
+            if (empty(get_config('local_debugtoolbar', 'enable')) === true) {
+                // Return nothing if plugin has been disabled.
+                return;
+            }
+        } catch (Exception $exception) {
+            // Table mdl_config is probably not available yet (e.g., installation processus).
             return;
         }
 
