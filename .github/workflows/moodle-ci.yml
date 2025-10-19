@@ -31,7 +31,7 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 3
       postgres:
-        image: postgres:14
+        image: postgres:15
         env:
           POSTGRES_USER: 'postgres'
           POSTGRES_HOST_AUTH_METHOD: 'trust'
@@ -50,25 +50,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # Cover all supported releases (https://moodledev.io/general/releases).
         database: [mariadb, pgsql]
-        moodle-branch: ['MOODLE_405_STABLE', 'MOODLE_500_STABLE', 'main']
-        # php: ['8.1', '8.2']
-        #
-        # There is an alterantive way allowing to define explicitly define which php, moodle-branch
-        # and database to use:
+        moodle-branch: ['MOODLE_500_STABLE', 'MOODLE_501_STABLE', 'main']
         include:
-          - moodle-branch: 'MOODLE_405_STABLE'
-            php: '8.1'
-          - moodle-branch: 'MOODLE_405_STABLE'
-            php: '8.2'
-          - moodle-branch: 'MOODLE_405_STABLE'
-            php: '8.3'
+          # Server requirements for 5.0: https://moodledev.io/general/releases/5.0#server-requirements
           - moodle-branch: 'MOODLE_500_STABLE'
             php: '8.2'
           - moodle-branch: 'MOODLE_500_STABLE'
             php: '8.3'
           - moodle-branch: 'MOODLE_500_STABLE'
             php: '8.4'
+          # Server requirements for 5.1: https://moodledev.io/general/releases/5.1#server-requirements
+          - moodle-branch: 'MOODLE_501_STABLE'
+            php: '8.2'
+          - moodle-branch: 'MOODLE_501_STABLE'
+            php: '8.3'
+          - moodle-branch: 'MOODLE_501_STABLE'
+            php: '8.4'
+          # Test on the latest PHP version.
           - moodle-branch: 'main'
             php: '8.4'
     steps:
