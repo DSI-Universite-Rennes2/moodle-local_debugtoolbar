@@ -38,10 +38,12 @@ define(['core/notification', 'core/modal_factory'], function(Notification, Modal
             // Handle information about caches.
             let cacheTable = document.querySelectorAll('table.cachesused');
             if (cacheTable[0]) {
+                cacheTable[0].classList.add("bg-dark");
                 cacheTable[0].setAttribute('id', 'local-debugtoolbar-cache');
             }
 
             if (cacheTable[1]) {
+                cacheTable[1].classList.add("bg-dark");
                 cacheTable[1].setAttribute('id', 'local-debugtoolbar-sessions');
             }
 
