@@ -52,7 +52,7 @@ class hook_callbacks {
 
         if (empty(get_config('local_debugtoolbar', 'enable_error_handler')) === false) {
             if (is_callable('local_debugtoolbar_error_handler') === false) {
-                require_once($CFG->dirroot.'/local/debugtoolbar/lib.php');
+                require_once($CFG->dirroot . '/local/debugtoolbar/lib.php');
             }
 
             set_error_handler('local_debugtoolbar_error_handler');
@@ -81,14 +81,20 @@ class hook_callbacks {
             return;
         }
 
-        require($CFG->dirroot.'/version.php');
+        require($CFG->dirroot . '/version.php');
 
         $performance = get_performance_info();
 
         if (function_exists('posix_times')) {
             $format = 'Ticks: %s user: %s sys: %s cuser: %s csys: %s';
-            $ticks = sprintf($format, $performance['ticks'], $performance['utime'], $performance['stime'],
-                $performance['cutime'], $performance['cstime']);
+            $ticks = sprintf(
+                $format,
+                $performance['ticks'],
+                $performance['utime'],
+                $performance['stime'],
+                $performance['cutime'],
+                $performance['cstime']
+            );
         }
 
         $data = new stdClass();
@@ -212,7 +218,7 @@ class hook_callbacks {
 
         // Database.
         $i++;
-        list($countread, $countwrite) = explode('/', $performance['dbqueries']);
+        [$countread, $countwrite] = explode('/', $performance['dbqueries']);
         $parameters = (object) ['queries' => ($countread + $countwrite), 'time' => $performance['dbtime']];
         $label = get_string('X_queries_in_Y_secs', 'local_debugtoolbar', $parameters);
         $data->records[$i] = (object) ['title' => $label, 'fa' => 'database', 'items' => []];
@@ -232,7 +238,7 @@ class hook_callbacks {
 
         // Cache.
         $i++;
-        list($cachehits, $cachemisses, $cachesets) = explode('/', $performance['cachesused']);
+        [$cachehits, $cachemisses, $cachesets] = explode('/', $performance['cachesused']);
         foreach (['cachehits', 'cachemisses', 'cachesets'] as $variable) {
             ${$variable} = trim(${$variable});
         }

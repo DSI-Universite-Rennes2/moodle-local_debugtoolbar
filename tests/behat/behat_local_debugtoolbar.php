@@ -69,7 +69,7 @@ class behat_local_debugtoolbar extends behat_base {
         }
 
         // Case when the debug toolbar is visible.
-        throw new ExpectationException('The following element "'.$xpath.'" should not exist', $this->getSession());
+        throw new ExpectationException('The following element "' . $xpath . '" should not exist', $this->getSession());
     }
 
     /**
@@ -86,16 +86,16 @@ class behat_local_debugtoolbar extends behat_base {
         $label = '';
         switch ($errorlevel) {
             case 'notice':
-                $label = 'Notices: '.$count;
+                $label = 'Notices: ' . $count;
                 break;
             case 'deprecation':
-                $label = 'Deprecated: '.$count;
+                $label = 'Deprecated: ' . $count;
                 break;
             case 'warning':
-                $label = 'Warnings: '.$count;
+                $label = 'Warnings: ' . $count;
                 break;
             case 'error':
-                $label = 'Errors: '.$count;
+                $label = 'Errors: ' . $count;
                 break;
         }
 
@@ -129,8 +129,10 @@ class behat_local_debugtoolbar extends behat_base {
      * @return void
      */
     public function i_should_see_an_alert_about_database_queries(string $errorlevel) {
-        $xpath = sprintf('//*[@id="local-debugtoolbar-fa-database-label"]//parent::button[contains(@class, "btn-%s")]',
-            $errorlevel);
+        $xpath = sprintf(
+            '//*[@id="local-debugtoolbar-fa-database-label"]//parent::button[contains(@class, "btn-%s")]',
+            $errorlevel
+        );
         $this->find('xpath', $xpath);
     }
 

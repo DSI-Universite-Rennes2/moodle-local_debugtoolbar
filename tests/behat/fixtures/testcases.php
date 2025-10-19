@@ -54,16 +54,16 @@ set_config('dbqueries_critical_threshold', 2000, 'local_debugtoolbar');
 $dbqueries = 0;
 switch ($case) {
     case 'php-notice':
-        trigger_error('This is a PHP notice.',  E_USER_NOTICE);
+        trigger_error('This is a PHP notice.', E_USER_NOTICE);
         break;
     case 'php-deprecated':
-        trigger_error('This is a PHP deprecation.',  E_USER_DEPRECATED);
+        trigger_error('This is a PHP deprecation.', E_USER_DEPRECATED);
         break;
     case 'php-warning':
-        trigger_error('This is a PHP warning.',  E_USER_WARNING);
+        trigger_error('This is a PHP warning.', E_USER_WARNING);
         break;
     case 'php-error':
-        trigger_error('This is a PHP error.',  E_USER_ERROR);
+        trigger_error('This is a PHP error.', E_USER_ERROR);
         break;
     case 'runtime-warning':
         set_config('realtime_warning_threshold', 1, 'local_debugtoolbar');
