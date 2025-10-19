@@ -24,6 +24,18 @@
 define(['core/notification', 'core/modal_factory'], function(Notification, ModalFactory) {
     return {
         initialize: function() {
+            // Handle close button.
+            let closeButton = document.getElementById('local-debugtoolbar-btn-close');
+            if (closeButton) {
+                closeButton.addEventListener('click', function() {
+                    let toolbar = document.getElementById('local-debugtoolbar');
+                    if (toolbar) {
+                        toolbar.classList.replace("d-flex", "d-none");
+                    }
+                });
+            }
+
+            // Handle information about caches.
             let cacheTable = document.querySelectorAll('table.cachesused');
             if (cacheTable[0]) {
                 cacheTable[0].setAttribute('id', 'local-debugtoolbar-cache');

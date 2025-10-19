@@ -34,9 +34,9 @@
 }}
 
 {{! Build debug toolbar }}
-<ul id="local-debugtoolbar" class="list-inline footer-dark bg-dark text-light">
+<ul id="local-debugtoolbar" class="bg-dark d-flex footer-dark justify-content-start list-unstyled px-0 text-light">
     {{#records}}
-    <li class="list-inline-item">
+    <li>
         <div class="btn-group dropup">
             <button type="button" class="btn dropdown-toggle {{style}} {{^style}}bg-dark text-light{{/style}}" data-bs-toggle="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-{{ fa }} me-1" role="img" aria-labelledby="local-debugtoolbar-fa-{{ fa }}-label"></i>
@@ -56,6 +56,14 @@
         </div>
     </li>
     {{/records}}
+
+    <!-- Close button. -->
+    <li class="flex-grow-1 list-inline-item text-end">
+        <a class="btn btn-sm text-light" id="local-debugtoolbar-btn-close">
+            <i aria-hidden="true" class="fa fa-close icon"></i>
+            <span class="visually-hidden">{{#str}}closebuttontitle{{/str}}</span>
+        </a>
+    </li>
 </ul>
 
 {{! Build modals }}

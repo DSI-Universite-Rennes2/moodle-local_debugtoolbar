@@ -50,6 +50,7 @@ class behat_local_debugtoolbar extends behat_base {
      * @return void
      */
     public function i_should_not_see_the_debug_toolbar() {
+        // Case when the debug toolbar is disabled.
         $xpath = '//*[@id="local-debugtoolbar"]';
         try {
             $this->find('xpath', $xpath);
@@ -58,6 +59,16 @@ class behat_local_debugtoolbar extends behat_base {
             return;
         }
 
+        // Case when the debug toolbar is closed.
+        $xpath = '//*[@id="local-debugtoolbar" and contains(@class, "d-none")]';
+        try {
+            $this->find('xpath', $xpath);
+        } catch (ElementNotFoundException $e) {
+            // All ok.
+            return;
+        }
+
+        // Case when the debug toolbar is visible.
         throw new ExpectationException('The following element "'.$xpath.'" should not exist', $this->getSession());
     }
 
