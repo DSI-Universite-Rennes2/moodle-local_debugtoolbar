@@ -21,7 +21,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-define(['core/notification', 'core/modal_factory'], function(Notification, ModalFactory) {
+define(['core/notification', 'core/modal'], function(Notification, Modal) {
     return {
         initialize: function() {
             // Handle close button.
@@ -53,8 +53,7 @@ define(['core/notification', 'core/modal_factory'], function(Notification, Modal
                     let targetid = e.currentTarget.getAttribute('data-targetid');
                     var targetElement = document.getElementById(targetid);
 
-                    ModalFactory.create({
-                        type: ModalFactory.types.ALERT,
+                    Modal.create({
                         title: e.currentTarget.textContent,
                         body: targetElement,
                         large: true
