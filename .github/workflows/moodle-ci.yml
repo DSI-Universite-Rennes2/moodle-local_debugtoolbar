@@ -31,7 +31,7 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 3
       postgres:
-        image: postgres:15
+        image: postgres:16
         env:
           POSTGRES_USER: 'postgres'
           POSTGRES_HOST_AUTH_METHOD: 'trust'
@@ -52,21 +52,22 @@ jobs:
       matrix:
         # Cover all supported releases (https://moodledev.io/general/releases).
         database: [mariadb, pgsql]
-        moodle-branch: ['MOODLE_500_STABLE', 'MOODLE_501_STABLE', 'main']
+        moodle-branch:
+          - MOODLE_501_STABLE
+          - MOODLE_502_STABLE
+          - main
         include:
-          # Server requirements for 5.0: https://moodledev.io/general/releases/5.0#server-requirements
-          - moodle-branch: 'MOODLE_500_STABLE'
-            php: '8.2'
-          - moodle-branch: 'MOODLE_500_STABLE'
-            php: '8.3'
-          - moodle-branch: 'MOODLE_500_STABLE'
-            php: '8.4'
           # Server requirements for 5.1: https://moodledev.io/general/releases/5.1#server-requirements
           - moodle-branch: 'MOODLE_501_STABLE'
             php: '8.2'
           - moodle-branch: 'MOODLE_501_STABLE'
             php: '8.3'
           - moodle-branch: 'MOODLE_501_STABLE'
+            php: '8.4'
+          # Server requirements for 5.2: https://moodledev.io/general/releases/5.2#server-requirements
+          - moodle-branch: MOODLE_502_STABLE
+            php: '8.3'
+          - moodle-branch: MOODLE_502_STABLE
             php: '8.4'
           # Test on the latest PHP version.
           - moodle-branch: 'main'
