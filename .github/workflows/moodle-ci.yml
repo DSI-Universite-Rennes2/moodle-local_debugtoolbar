@@ -9,7 +9,14 @@
 name: Moodle Plugin CI
 
 # Run this workflow every time a new commit pushed to your repository or PR created.
-on: [push, pull_request]
+# yamllint disable-line rule:truthy
+on:
+  push:
+    tags-ignore: ['*']
+    branches: ['*']
+  pull_request:
+    tags-ignore: ['*']
+    branches: ['*']
 
 jobs:
   # Set the job key. The key is displayed as the job name
