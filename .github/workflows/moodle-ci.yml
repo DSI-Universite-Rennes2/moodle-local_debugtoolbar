@@ -23,22 +23,21 @@ jobs:
   # when a job name is not provided.
   test:
     # Virtual environment to use.
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     # DB services you need for testing.
     services:
       mariadb:
-        image: mariadb:10
+        image: ${{ matrix.database == 'mariadb' && 'mariadb:11' || '' }}
         env:
-          MYSQL_USER: 'root'
-          MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+          MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: '1'
           MYSQL_CHARACTER_SET_SERVER: "utf8mb4"
           MYSQL_COLLATION_SERVER: "utf8mb4_unicode_ci"
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 3
+        options: --health-cmd="healthcheck.sh --connect --innodb_initialized" --health-interval 10s --health-timeout 5s --health-retries 3
       postgres:
-        image: postgres:16
+        image: ${{ matrix.database == 'pgsql' && 'postgres:17' || '' }}
         env:
           POSTGRES_USER: 'postgres'
           POSTGRES_HOST_AUTH_METHOD: 'trust'
@@ -60,21 +59,19 @@ jobs:
         # Cover all supported releases (https://moodledev.io/general/releases).
         database: [mariadb, pgsql]
         moodle-branch:
-          - MOODLE_501_STABLE
           - MOODLE_502_STABLE
+          - MOODLE_503_STABLE
           - main
         include:
-          # Server requirements for 5.1: https://moodledev.io/general/releases/5.1#server-requirements
-          - moodle-branch: 'MOODLE_501_STABLE'
-            php: '8.2'
-          - moodle-branch: 'MOODLE_501_STABLE'
-            php: '8.3'
-          - moodle-branch: 'MOODLE_501_STABLE'
-            php: '8.4'
           # Server requirements for 5.2: https://moodledev.io/general/releases/5.2#server-requirements
           - moodle-branch: MOODLE_502_STABLE
             php: '8.3'
           - moodle-branch: MOODLE_502_STABLE
+            php: '8.4'
+          # Server requirements for 5.3: https://moodledev.io/general/releases/5.3#server-requirements
+          - moodle-branch: MOODLE_503_STABLE
+            php: '8.3'
+          - moodle-branch: MOODLE_503_STABLE
             php: '8.4'
           # Test on the latest PHP version.
           - moodle-branch: 'main'
