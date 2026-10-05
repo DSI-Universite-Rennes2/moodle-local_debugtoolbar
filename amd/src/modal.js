@@ -17,7 +17,7 @@
  * JS to display modal on local_debugtoolbar plugin.
  *
  * @module      local_debugtoolbar/modal
- * @copyright   2023 Université Rennes 2 <dsi-contact@univ-rennes2.fr>
+ * @copyright   2023 Université Rennes 2
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

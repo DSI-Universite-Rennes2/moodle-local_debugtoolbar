@@ -20,7 +20,7 @@ namespace local_debugtoolbar\privacy;
  * Privacy Subsystem for local_debugtoolbar implementing null_provider.
  *
  * @package    local_debugtoolbar
- * @copyright  2023 Université Rennes 2 <dsi-contact@univ-rennes2.fr>
+ * @copyright  2023 Université Rennes 2
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider {

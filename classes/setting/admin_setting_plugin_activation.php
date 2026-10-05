@@ -14,14 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Class to handle local_debugtoolbar plugin activation.
- *
- * @package    local_debugtoolbar
- * @copyright  2023 Université Rennes 2 <dsi-contact@univ-rennes2.fr>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace local_debugtoolbar\setting;
 
 use admin_setting_configcheckbox;
@@ -30,7 +22,7 @@ use admin_setting_configcheckbox;
  * Class to handle local_debugtoolbar plugin activation.
  *
  * @package    local_debugtoolbar
- * @copyright  2023 Université Rennes 2 <dsi-contact@univ-rennes2.fr>
+ * @copyright  2023 Université Rennes 2
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_plugin_activation extends admin_setting_configcheckbox {
